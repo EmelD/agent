@@ -1,0 +1,124 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    ba-agent-moi_ploshadki-dobavlenie
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Кабинет</a></li>
+						<li><a href="#">Мои площадки</a></li>
+					</ul>
+				</nav>
+				<h1>Добавление/редактирование площадки</h1>
+				<section class="form-box">
+					<form action="#">
+						<fieldset>
+							<div class="form-box-i clearfix">
+								<label>Тип площадки</label>
+								<div class="form-box-c clearfix">
+									<div class="form-box-cl">
+										<select class="custom-select">
+											<option>Группа вКонтакте</option>
+										</select>
+									</div>
+									<div class="form-box-cr">
+										<select class="custom-select">
+											<option>livejournal.com</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as1">Адрес площадки</label>
+								<div class="form-box-c">
+									<input type="text" value="Илья Гордеев" id="as1" class="custom-input" />
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as2">Имя пользователя</label>
+								<div class="form-box-c">
+									<input type="text" value="" id="as2" class="custom-input" />
+									<span class="help">Имя пользователя в соц. сети на которой расположена площадка</span>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label>Добавить приложение</label>
+								<div class="form-box-c">
+									<ul class="form-box-social-apps clearfix">
+										<li><a href="#" class="fb"></a></li>
+										<li><a href="#" class="vk"></a></li>
+										<li><a href="#" class="tw"></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as3">Описание</label>
+								<div class="form-box-c">
+									<textarea cols="1" rows="1" id="as3" class="custom-textarea"></textarea>
+									<span class="help">Краткое описание вашей площадки, на какую аудиторию она ориентирована, тематика контента и т.д</span>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label>Тематика</label>
+								<div class="form-box-c">
+									<select class="custom-select">
+										<option>Выберите тематику</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as4">Страна или регион</label>
+								<div class="form-box-c">
+									<input type="text" value="" id="as4" class="custom-input" />
+									<span class="help">Например, Московская область или Россия</span>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as5">Теги</label>
+								<div class="form-box-c">
+									<input type="text" value="" id="as5" class="custom-input" />
+									<span class="help">3—5 тегов через запятую</span>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as6">Дата создания площадки</label>
+								<div class="form-box-c">
+									<input type="text" value="" id="as6" class="custom-input date" />
+									<a href="#" class="calendar"></a>
+									<span class="help">15 марта 2012</span>
+								</div>
+							</div>
+							<h3>Посещаемость</h3>
+							<div class="form-box-i clearfix">
+								<label for="as7">Пароль от статистики</label>
+								<div class="form-box-c">
+									<input type="text" value="" id="as7" class="custom-input" />
+								</div>
+							</div>
+							<div class="form-box-i form-box-graph">
+							</div>
+							<h3>Стоимость размещения</h3>
+							<div class="form-box-i clearfix">
+								<label for="as8">Публикация</label>
+								<div class="form-box-c">
+									<input type="text" value="0" id="as8" class="custom-input cost" />
+									<span class="text">рублей</span>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as9">Комментарий</label>
+								<div class="form-box-c">
+									<input type="text" value="0" id="as9" class="custom-input cost" />
+									<span class="text">рублей</span>
+								</div>
+							</div>
+							<div class="form-box-b">
+								<input type="submit" value="Сохранить площадку" class="orange-button" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    Регистрация
+{% endblock %}
+{% block content %}
+    <ul class="breadcrumb">
+        <li>Кабинет <b class="divider">/</b></li>
+        <li>Регистрация</li>
+    </ul>
+    <h1>Регистрация</h1>
+    <form id="signup" method="post">
+        <fieldset>
+            <div class="control-group">
+                <div id="output">
+                    {# Ajax #}
+                </div>
+            </div>
+            <div class="control-group" id="cg_email">
+                <label class="control-label" for="id_email">E-mail</label>
+                <div class="controls">
+                    <input type="text" name="email" id="id_email" class="span4">
+                </div>
+            </div>
+            <div class="control-group" id="cg_password">
+                <label class="control-label" for="id_password">Пароль</label>
+                <div class="controls">
+                    <input type="password" name="password" id="id_password" class="span3">
+                </div>
+            </div>
+            <div class="control-group" id="cg_type">
+                <label class="control-label" for="id_type">Начать как:</label>
+                <div class="controls">
+                    <select name="type" class="span3">
+                        <option value="advertiser">Рекламодатель</option>
+                        <option value="agent">Агент</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                {% csrf_token %}
+                <a id="signup" onclick="form_send('#signup', '{% url 'beagent.views.common.signup' %}', '#output', '#signup', undefined, undefined)" class="btn btn-sign">Зарегистрироваться</a>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

@@ -1,0 +1,152 @@
+{% extends 'beagent/base.html' %}
+{% load query_string %}
+{% block title %}
+    ba-reklamodatel-moi_zadachi
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Мои задачи</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+                        {% if not request.GET.status %}
+                            <li class="active"><a href="{% url 'beagent.views.common.profile_view_tasks' %}">В работе</a></li>
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=checkout">На проверке</a></li>
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=refine">На доработке</a></li>
+                        {% elif request.GET.status == 'checkout' %}
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}">В работе</a></li>
+                            <li class="active"><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=checkout">На проверке</a></li>
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=refine">На доработке</a></li>
+                        {% elif request.GET.status == 'refine' %}
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}">В работе</a></li>
+                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=checkout">На проверке</a></li>
+                            <li class="active"><a href="{% url 'beagent.views.common.profile_view_tasks' %}?status=refine">На доработке</a></li>
+                        {% endif %}
+					</ul>
+				</nav>
+				<section class="filter-table">
+					<form action="{% url 'beagent.views.common.profile_view_tasks' %}" name='formfilter' id="formfilter" method="POST">
+                        {% csrf_token %}
+						<fieldset class="clearfix">
+							<label>Отфильтровать по дате</label>
+                            <div class="filter-table-date">
+                                <input type="text" value="" class="inp-cal" id="datepicker" name="date_from"/>
+                                <a class="ico-cal"></a>
+                            </div>
+                            <div class="filter-table-date">
+                                <input type="text" value="" class="inp-cal" id="datepicker2" onchange="document.getElementById('formfilter').submit(); return false;" name="date_to"/>
+                                <a class="ico-cal"></a>
+                            </div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="table-box">
+					<table class="table-mytasks">
+						<thead>
+							<tr>
+								<th><input type="checkbox" class="table-mytasks-check" id="selall" value="1"/></th>
+								<th>Задача</th>
+								<th>Статус</th>
+								<th>Дата начала</th>
+								<th>Последнее событие</th>
+								<th>Исполнитель</th>
+							</tr>
+						</thead>
+						<tbody>
+                        <form id="form">
+                        {% csrf_token %}
+                        {% for item in list %}
+                            <tr>
+                            <td><input type="checkbox" class="table-mytasks-check" name="task" value="{{ item.pk }}"/></td>
+                            <td>
+                                <span class="title toverflow"><a href="{% url 'beagent.views.common.profile_view_task' %}&id={{ item.pk }}">{{ item.campaign_name }}</a></span>
+                                <span class="messages">12</span>
+                                <span class="desc">{{ item.work_type }}</span>
+                            </td>
+                            <td>
+                                {% if item.status == 'checkout' %}
+                                    <span class="status-yellow">
+                                {% else %}
+                                    <span class="status-olive">
+                                {% endif %}
+                                {{ item.status }}</span>
+                                <span class="desc">Осталось {{ item.elapsed_hours }} часов из {{ item.total_hours }}</span>
+                            </td>
+                            <td>{{ item.date_start|date:"d b. Y, H:i"|lower }}</td>
+                            <td>{{ item.last_event|date:"d b. Y, H:i"|lower }}</td>
+                            <td>
+                                <span class="toverflow"><a href="#">{{ item.name }} {{ item.surname }}</a></span>
+                                <span class="rating-ico">{{ item.rating }}</span>
+                            </td>
+                        {% endfor %}
+                        </form>
+						</tbody>
+					</table>
+				</section>
+                <section class="paginator-box">
+                    {% for pagination_list_item in pagination_list %}
+                        {% if not pagination_list_item %}
+                            <li class="dots"><a href="#">...</a></li>
+                        {% else %}
+                            <li {% if pagination_page == pagination_list_item %}class="active"{% endif %}>
+                                <a href="{% url pages %}?page={{ pagination_list_item }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ pagination_list_item }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.back per_page=request.GET.per_page status=request.GET.status %}" class="paginator-navi back"><span>Предыдущая</span></a>
+                    <a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.forward per_page=request.GET.per_page status=request.GET.status %}" class="paginator-navi next"><span>Следующая</span></a>
+
+                    <ul class="paginator">
+                        <li>Страница:</li>
+                        {% for item in pag.pagging_pages %}
+                            {% if item == pag.page%}
+                                <li class='active'><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=a&per_page=10' page=item per_page=request.GET.per_page status=request.GET.status %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% else %}
+                                <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=m&per_page=10' page=item per_page=request.GET.per_page status=request.GET.status %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <span class="paginator-options">
+                        <div class="on-page">На странице: </div>
+                        <div class="paginated-pages">
+                            <a class="paginator-view">
+                                <span>
+                                    <div class="dropdown">
+                                        <a id="drop4" class="dropdown-toggle" data-toggle="dropdown" role="button">{{ pag.per_page }} элементов<b class="caret"></b></a>
+                                        <ul id="menu1" class="dropdown-menu" aria-labelledby="drop4" role="menu">
+                                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=1&per_page=5' status=request.GET.status %}" tabindex="-1">5 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=1&per_page=10' status=request.GET.status %}" tabindex="-1">10 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=1&per_page=15' status=request.GET.status %}" tabindex="-1">15 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.profile_view_tasks' %}{% query_string '?page=1&per_page=20' status=request.GET.status %}" tabindex="-1">20 элементов</a></li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="count_elements">/ <strong>{{ count_list }}</strong></div>
+                    </span>
+                </section>
+                <section class="buttons-panel clearfix">
+                    <input class="button gray-button" type="submit" value="Оплатить" onclick="form_send('#form', '{% url 'beagent.views.common.pay_task' %}', undefined, this)">
+                    <input class="button red-button" type="submit" value="Отказаться" onclick="form_send('#form', '{% url 'beagent.views.common.reject_task' %}', undefined, this)">
+                </section>
+			</div>
+		</div>
+{% endblock %}

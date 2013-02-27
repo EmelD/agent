@@ -1,0 +1,7 @@
+<input type="text" value="" id="co1" class="custom-input" onclick="clear_radio('#purses')" name="new_purse"/>
+{% for item in purses %}
+    <div class="cashform-radio-i clearfix">
+        <input type="radio" name="name" id="co3" class="cashform-radio" value="{{ item.pk }}" >
+        <label for="co3" class="cashform-t">{{ item.name }}</label>
+    </div>
+{% endfor %}

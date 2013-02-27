@@ -1,0 +1,32 @@
+{% extends 'beagent/base.html' %}
+{% block content %}
+    <nav class="breadcrumbs">
+        <ul>
+            <li>Кабинет</li>
+            <li>Вход</li>
+        </ul>
+    </nav>
+    <h1>Вход</h1>
+    <section class="form-box">
+        <form id="signin">
+            <fieldset>
+                <div class="form-box-i clearfix" id="cg_email">
+                    <label class="control-label" for="id_email">E-mail</label>
+                    <div class="form-box-c">
+                        <input type="text" name="email" id="id_email"  class="custom-input">
+                    </div>
+                </div>
+                <div class="form-box-i clearfix" id="cg_password">
+                    <label class="control-label" for="id_password">Пароль</label>
+                    <div class="form-box-c">
+                        <input type="password" name="password" id="id_password" class="custom-input">
+                    </div>
+                </div>
+                <div class="form-box-b">
+                    {% csrf_token %}
+                    <a href="#" onclick="form_send('#signin', '{% url 'beagent.views.common.signin' %}', '#output', this)" class="orange-button">Войти</a>
+                </div>
+            </fieldset>
+        </form>
+    </section>
+{% endblock %}

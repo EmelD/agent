@@ -1,0 +1,147 @@
+{% extends 'beagent/base.html' %}
+{% load query_string %}
+{% block title %}
+    ba-agent-profile-edit
+{% endblock %}
+{% block content %}
+        <nav class="breadcrumbs">
+            <ul>
+                <li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+            </ul>
+        </nav>
+        <h1>Редактирование профиля</h1>
+        <nav class="menu-l3">
+            <ul class="clearfix">
+                <li id="pass_block"><a class='pointer' onclick="cclick('#pass-change-popup','#pass_block');">Сменить пароль</a></li>
+                <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}">Чёрный список</a></li>
+                {% if user.type == 'advertiser' %}
+                    <li><a href="{% url 'beagent.views.common.edit_profile_whiteLists' %}">Белый список</a></li>
+                {% endif %}
+            </ul>
+            <div class="popup pass-change-popup" id="pass-change-popup">
+                <form id="changePassword">
+                    <fieldset>
+                        <div class="pass-change-i">
+                            <label>Старый пароль</label>
+                            <div class="pass-change-c">
+                                <input type="text" value="" class="custom-input custom-input-small" name="old_password"/>
+                            </div>
+                        </div>
+                        <div class="pass-change-i">
+                            <label>Новый пароль</label>
+                            <div class="pass-change-c">
+                                <input type="text" value="" class="custom-input custom-input-small" name="new_password"/>
+                            </div>
+                        </div>
+                        <div class="pass-change-i">
+                            <label>Повторите новый пароль</label>
+                            <div class="pass-change-c">
+                                <input type="text" value="" class="custom-input custom-input-small" name="confirm_password"/>
+                            </div>
+                        </div>
+                        <div class="popup-buttons clearfix">
+                            {% csrf_token %}
+                            <li><input class="orange-button" type="button" onclick="form_send('#changePassword', '{% url 'beagent.views.common.change_password' %}', undefined, this)" value="Сохранить"></li>
+                            <li><a onclick="reset_form('#changePassword')" class="popup-link-btn pointer" >Отмена</a></li>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </nav>
+				<section class="black-list clearfix">
+					<div class="left-col">
+						<div class="table-box">
+							<table class="table-blacklist">
+								<thead>
+									<tr>
+										<th>Дата добавления</th>
+										<th>Рекламодатель</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {% for item in list %}
+                                        <tr>
+                                            <td>{{ item.date_added }}</td>
+                                            <td>
+                                                <span class="title toverflow"><a href="{%  url 'beagent.views.agent.view_advertiser' %}">{{ item.object.name }} {{ item.object.surname }}</a></span>
+                                                <span class="rating-ico">{{ item.object.rating }}</span>
+                                                <a href="{% url 'beagent.views.common.delete_from_list' item.pk %}" class="delete"><span>Удалить</span></a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="right-col">
+						<div class="search-list">
+							<form action="#">
+								<fieldset>
+									<label>Поиск в списке</label>
+									<input type="text" value="" class="custom-input custom-input-small" />
+									<input type="submit" value="Найти" class="orange-button" />
+								</fieldset>
+							</form>
+						</div>
+					</div>
+				</section>
+				<section class="paginator-box">
+                    {% for pagination_list_item in pagination_list %}
+                        {% if not pagination_list_item %}
+                            <li class="dots"><a href="#">...</a></li>
+                        {% else %}
+                            <li {% if pagination_page == pagination_list_item %}class="active"{% endif %}>
+                                <a href="{% url pages %}?page={{ pagination_list_item }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ pagination_list_item }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.back per_page=request.GET.per_page %}" class="paginator-navi back"><span>Предыдущая</span></a>
+                    <a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.forward per_page=request.GET.per_page %}" class="paginator-navi next"><span>Следующая</span></a>
+
+					<ul class="paginator">
+						<li>Страница:</li>
+                        {% for item in pag.pagging_pages %}
+                            {% if item == pag.page%}
+                                <li class='active'><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=a&per_page=10' page=item per_page=request.GET.per_page %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% else %}
+                                <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=m&per_page=10' page=item per_page=request.GET.per_page %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% endif %}
+                        {% endfor %}
+					</ul>
+                    <span class="paginator-options">
+                        <div class="on-page">На странице: </div>
+                        <div class="paginated-pages">
+                            <a class="paginator-view">
+                                <span>
+                                    <div class="dropdown">
+                                        <a id="drop4" class="dropdown-toggle" data-toggle="dropdown" role="button">{{ pag.per_page }} элементов<b class="caret"></b></a>
+                                        <ul id="menu1" class="dropdown-menu" aria-labelledby="drop4" role="menu">
+                                            <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=1&per_page=5' %}" tabindex="-1">5 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=1&per_page=10' %}" tabindex="-1">10 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=1&per_page=15' %}" tabindex="-1">15 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}{% query_string '?page=1&per_page=20' %}" tabindex="-1">20 элементов</a></li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="count_elements">/ <strong>{{ count_list }}</strong></div>
+                    </span>
+				</section>
+
+            </div>
+{% endblock %}
+

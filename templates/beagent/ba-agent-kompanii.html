@@ -1,0 +1,222 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    <title>ba-agent-kompanii</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Компании</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li class="active"><a href="#">Все Компании</a></li>
+						<li><a href="#">Поданные заявки</a></li>
+						<li><a href="#">Только подходящие</a></li>
+					</ul>
+				</nav>
+				<section class="filter-company">
+					<div class="filter-company-i">
+						<form action="#">
+							<fieldset>
+								<div class="filter-controls clearfix">
+									<div class="filter-controls-i">
+										<div class="filter-stroke">
+											<span class="filter-t">Оплата за действие</span>
+											<div class="filter-slider clearfix">
+												<div class="controls clearfix">
+													<label>от</label>
+													<input type="text" value="" class="min" />
+													<label>до</label>
+													<input type="text" value="" class="max" />
+													<span>руб.</span>
+												</div>
+												<div class="slider">
+													<span class="line"></span>
+													<span class="line-active" style="width:93px;"></span>
+													<span class="button button-left" style="left:0;"></span>
+													<span class="button button-right" style="left:98px;"></span>
+												</div>
+											</div>
+										</div>
+										<div class="filter-stroke filter-stroke-select clearfix">
+											<label for="fs3" class="filter-t">Компании за</label>
+											<div class="filter-s">
+												<select id="fs3" class="custom-select">
+													<option>Все время</option>
+												</select>
+											</div>
+										</div>
+										<div class="filter-stroke">
+											<label for="fs2" class="filter-t">Название или ключевое слово</label>
+											<input type="text" value="" id="fs2" class="custom-input" />
+										</div>
+										<div class="filter-stroke filter-stroke-text">
+											<span class="filter-t">Тип работы: <span>Любой</span></span>
+										</div>
+										<div class="filter-stroke filter-stroke-text">
+											<span class="filter-t">Тип площадки: <span>Любой</span></span>
+										</div>
+									</div>
+									<div class="filter-controls-i">
+										<div class="filter-stroke filter-stroke-text">
+											<span class="filter-t">Тип тональности: <span>Любой</span></span>
+										</div>
+										<div class="filter-stroke">
+											<label for="fs1" class="filter-t">Страны и регионы</label>
+											<input type="text" value="" id="fs1" class="custom-input" />
+											<span class="filter-h">Например, Московская область или Россия</span>
+										</div>
+									</div>
+								</div>
+								<div class="filter-company-buttons">
+									<ul class="clearfix">
+										<li><input type="submit" value="Подобрать" class="orange-button" /></li>
+										<li class="text-button">или <a href="#">сбросить фильтр</a></li>
+									</ul>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<a href="#" class="filter-company-close"><span>Скрыть фильтр</span> ↑</a>
+				</section>
+				<section class="table-box">
+					<table class="table-company">
+						<thead>
+							<tr>
+								<th>Дата добавления</th>
+								<th>Компания</th>
+								<th>Цена, руб.</th>
+								<th>Рекламодатель</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="info-toggle open"></a>
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В Компании 2 задания, <a href="#" class="open"><span>показать</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">До конца компании — 5 дней</span>
+											<span class="desc">Выполнено 7 задач из 35</span>
+										</div>
+										<div class="info-cost">400—18 000</div>
+									</div>
+									<div class="info-dop">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter</span>
+											<span>400</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook</span>
+											<span>50</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге</span>
+											<span>400</span>
+										</div>
+									</div>
+								</td>
+								<td>
+									<a href="#" class="toverflow">Константин Константинов</a>
+									<span class="rating-ico">5</span>
+								</td>
+							</tr>
+							<tr>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="info-toggle close"></a>
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В Компании 2 задания, <a href="#" class="close"><span>скрыть</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">До конца компании — 25 дней</span>
+											<span class="desc">Выполнено 7 задач из 1547</span>
+										</div>
+										<div class="info-cost">400—530</div>
+									</div>
+									<div class="info-dop" style="display:block;">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter</span>
+											<span>400</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook</span>
+											<span>50</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге</span>
+											<span>400</span>
+										</div>
+									</div>
+								</td>
+								<td>
+									<a href="#" class="toverflow">Константин Константинов</a>
+									<span class="rating-ico">5</span>
+								</td>
+							</tr>
+							<tr>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="info-toggle open"></a>
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В Компании 2 задания, <a href="#" class="open"><span>показать</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">До конца компании — 5 дней</span>
+											<span class="desc">Выполнено 7 задач из 35</span>
+										</div>
+										<div class="info-cost">400—18 000</div>
+									</div>
+									<div class="info-dop">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter</span>
+											<span>400</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook</span>
+											<span>50</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге</span>
+											<span>400</span>
+										</div>
+									</div>
+								</td>
+								<td>
+									<a href="#" class="toverflow">Константин Попов</a>
+									<span class="rating-ico">5</span>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section class="paginator-box">
+					<a href="#" class="paginator-navi back"><span>Предыдущая</span></a>
+					<a href="#" class="paginator-navi next"><span>Следующая</span></a>
+					<ul class="paginator">
+						<li>Страница:</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="active"><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">...</a></li>
+						<li><a href="#">7</a></li>
+					</ul>
+					<span class="paginator-options">На странице: <a href="#" class="paginator-view"><span>10 элементов</span></a> / <strong>152</strong></span>
+				</section>
+			</div>
+		</div>
+{% endblock %}

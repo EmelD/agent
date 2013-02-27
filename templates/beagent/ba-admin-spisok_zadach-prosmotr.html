@@ -1,0 +1,77 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+        <title>ba-admin-spisok_zadach-prosmotr</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<div class="left-col">
+					<nav class="breadcrumbs">
+						<ul>
+							<li><a href="#">Администратор</a></li>
+						</ul>
+					</nav>
+					<h1>Просмотр задачи <span class="subheader">Публикация в блоге</span></h1>
+					<h2>Параметры задачи</h2>
+					<section class="params">
+						<table>
+							<tbody>
+								<tr>
+									<td>Текущие состояние</td>
+									<td>На проверке (осталось 41 часов из 48)</td>
+								</tr>
+								<tr>
+									<td>Стоимость</td>
+									<td><span class="big-font">300</span> руб.</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section class="requirements">
+						<h2>Требования к задачи</h2>
+						<div class="requirements-i">
+							<p>Интерактивный рассказ — это возможность прочитать произведение так, как вы этого хотите. Рассказ имеет большую вариативность действий в той или иной ситуации и вы сами решаете как будут разворачиваться события в сюжете. В зависимости от вашего выбора и будет зависеть как далеко вы сможете “пройти” книгу. Интерактивный рассказ — это возможность прочитать произведение так, как вы этого хотите.</p>
+							<p>Рассказ имеет большую вариативность действий в той или иной ситуации и вы сами решаете как будут разворачиваться события в сюжете. В зависимости от вашего выбора и будет зависеть как далеко вы сможете “пройти” книгу.</p>
+							<ul>
+								<li>1. Интерактивный рассказ — это возможность</li>
+								<li>2. прочитать произведение так, как вы этого хотите.</li>
+								<li>3. Рассказ имеет большую вариативность действий в той</li>
+								<li>4. Или иной ситуации и вы сами решаете как будут разворачиваться события в сюжете.</li>
+							</ul>
+						</div>
+					</section>
+				</div>
+				<aside class="right-col">
+					<div class="peoples">
+						<div class="peoples-i clearfix">
+							<div class="peoples-avatar">
+								<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+							</div>
+							<div class="peoples-info">
+								<span class="title"><a href="#">Иван Приходько</a></span>
+								<span class="rating"><span class="ico-rate">5</span></span>
+								<span class="type">Рекламодатель</span>
+							</div>
+						</div>
+						<div class="peoples-i clearfix">
+							<div class="peoples-avatar">
+							</div>
+							<div class="peoples-info">
+								<span class="title"><a href="#">Иван Иванов</a></span>
+								<span class="rating"><span class="ico-rate">5</span></span>
+								<span class="type">Исполнитель</span>
+							</div>
+						</div>
+					</div>
+					<div class="events">
+						<h3>События задачи</h3>
+						<ul>
+							<li>Начало работы <span>7 декабря 2010, 16:50</span></li>
+							<li>Поступило на проверку <span>7 декабря 2010, 16:50</span></li>
+							<li>Отправлено на доработку <span>25 декабря 2010, 16:50</span></li>
+							<li>Поступило на проверку <span>7 декабря 2010, 16:50</span></li>
+						</ul>
+					</div>
+				</aside>
+			</div>
+		</div>
+{% endblock %}

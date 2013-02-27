@@ -1,0 +1,93 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    <title>ba-reklamodatel-izbrannoe-sites</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Избранное</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li><a href="#">Агенты</a></li>
+						<li class="active"><a href="#">Площадки</a></li>
+					</ul>
+				</nav>
+				<section class="table-box">
+					<table class="table-fav">
+						<thead>
+							<tr>
+								<th>Тип</th>
+								<th>Площадка</th>
+								<th>тИЦ</th>
+								<th>PR</th>
+								<th>Чел./сут.</th>
+								<th>Цена, руб.</th>
+								<th colspan="2">Дата создания</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Просто сайт</td>
+								<td>
+									<span class="title toverflow"><a href="#">ppalachh.livejournal.com</a></span>
+									<span class="desc">Площадка 1, Площадка 2</span>
+								</td>
+								<td>1700</td>
+								<td>1050</td>
+								<td>2000</td>
+								<td>18 565</td>
+								<td>14 июня 2012, 11:00</td>
+								<td><a href="#" class="delete"><span>Удалить</span></a></td>
+							</tr>
+							<tr>
+								<td>Блог</td>
+								<td>
+									<span class="title toverflow"><a href="#">ppalachh.livejournal.com</a></span>
+									<span class="desc">Площадка 1, Площадка 2</span>
+								</td>
+								<td>15</td>
+								<td>1050</td>
+								<td>200</td>
+								<td>154</td>
+								<td>14 июня 2012, 11:00</td>
+								<td><a href="#" class="delete"><span>Удалить</span></a></td>
+							</tr>
+							<tr>
+								<td>Просто сайт</td>
+								<td>
+									<span class="title toverflow"><a href="#">ppalachh.livejournal.com</a></span>
+									<span class="desc">Площадка 1, Площадка 2</span>
+								</td>
+								<td>1700</td>
+								<td>1050</td>
+								<td>2000</td>
+								<td>18 565</td>
+								<td>14 июня 2012, 11:00</td>
+								<td><a href="#" class="delete"><span>Удалить</span></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section class="paginator-box">
+					<a href="#" class="paginator-navi back"><span>Предыдущая</span></a>
+					<a href="#" class="paginator-navi next"><span>Следующая</span></a>
+					<ul class="paginator">
+						<li>Страница:</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="active"><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">...</a></li>
+						<li><a href="#">7</a></li>
+					</ul>
+					<span class="paginator-options">На странице: <a href="#" class="paginator-view"><span>10 элементов</span></a> / <strong>152</strong></span>
+				</section>
+			</div>
+		</div>
+{% endblock %}

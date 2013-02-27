@@ -1,0 +1,87 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    кабинет
+{% endblock %}
+{% block content %}
+				<div class="left-col">
+					<nav class="breadcrumbs">
+						<ul>
+							<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+						</ul>
+					</nav>
+                    <h1>
+                        {% if not user.name or not user.surname %}{{ user.email }}{% else %}{{ user.name }} {{ user.surname }}{% endif %}
+                        {% if user.birthday %}
+                            <span class="subheader">Дата рождения — {{ user.birthday }}</span>
+                        {% endif %}
+                    </h1>
+					<section class="statistics">
+						<ul>
+                            {% if tasks %}<li>Количество непроверенных задач — <span class="font-big"><a href="{% url 'beagent.views.agent.view_agent_invitations' %}">{{ tasks|length }}</a></span></li>{% endif %}
+                            {% if company_requests %}<li>Количество заявок на Кампании — <span class="font-big"><a href="{% url 'beagent.views.agent.view_agent_invitations' %}">{{ company_requests|length }}</a></span></li>{% endif %}
+                            <li>Всего заморожено денег — <span class="font-big">500 </span> руб.</li>
+						</ul>
+					</section>
+                    {% if reviews %}
+                        <section class="opinions">
+                            <h2>Отзывы <span class="sup"><span class="green">+{{ reviews.positive }}</span> / <span class="red">−{{ reviews.negative }}</span></span></h2>
+                            {% for review in reviews.reviews %}
+                                {% if review.text|length < 60 %}
+                                    <div class="opinions-i opinion-notoggle" id="opinion{{ review.pk }}">
+                                {% else %}
+                                    <div class="opinions-i opinion-hide" id="opinion{{ review.pk }}">
+                                {% endif %}
+                            <div class="opinion-t">
+                                <p>{{ review.text }}</p>
+                                <a onclick="show_opinion('#opinion{{ review.pk }}')" class="opinion-toggle"></a>
+                            </div>
+                            <div class="opinion-user clearfix">
+                                <div class="opinion-avatar">
+                                    {% load thumbnail %}
+                                    <a><img src="{% thumbnail review.reviewer.photo 180x190 crop %}" alt="" /></a>
+                                </div>
+                                <div class="opinion-info">
+                                    <span class="opinion-name"><a href="#">{{ review.reviewer.name }} {{ review.reviewer.surname }}</a> <span class="rating">{{ review.reviewer.rating }}</span></span>
+                                    <time class="opinion-date">{{ review.added|date:"j F Y, G:i"|lower }}</time>
+                                </div>
+                            </div>
+                            </div>
+                            {% endfor %}
+                        </section>
+                    {% endif %}
+				</div>
+				<aside class="right-col">
+					<div class="userinfo">
+						<div class="userinfo-avatar">
+                            {% load thumbnail %}
+                            <a href="{% url 'beagent.views.common.profile' %}"><img src="{% thumbnail user.photo 180x190 crop %}" alt="" /></a>
+						</div>
+						<p>На проекте:{% if on_project.y >= 5%}
+                            {{ on_project.y }} лет
+                        {% elif on_project.y > 1 and on_project.y < 5%}
+                            {{ on_project.y }} года
+                        {% elif on_project.y == 1 or on_project.y == 21 or on_project.y == 31 or on_project.y == 41 or on_project.y == 51 %}
+                            {{ on_project.y }} год
+                        {% endif %}
+                            {% if on_project.m == 1 %}
+                                {{ on_project.m }} месяц
+                            {% elif on_project.m > 1 and on_project.m < 5%}
+                                {{ on_project.m }} месяца
+                            {% elif on_project.m > 5%}
+                                {{ on_project.m }} месяцев
+                            {% endif %}
+                            {% if on_project.d == 1 or on_project.d == 21 or on_project.d == 31%}
+                                {{ on_project.d }} день
+                            {% elif on_project.d > 1 and on_project.d < 5 or on_project.d > 21 and on_project.d < 25 %}
+                                {{ on_project.d }} дня
+                            {% elif on_project.d > 5 and on_project.d < 21 or on_project.d > 24 and on_project.d < 31 %}
+                                {{ on_project.d }} дней
+                            {% endif %}</p>
+                        <p>Последнее посещение: {{ user.last_login|date:"d F H:i"|lower }}</p>
+                        {% if user.rating %}
+                            <p class="rating">Рейтинг <span class="ico-rate">{{ user.rating }}</span></p>
+                        {% endif %}
+					</div>
+				</aside>
+			</div>
+{% endblock %}

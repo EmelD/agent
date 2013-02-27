@@ -1,0 +1,183 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    ba-reklamodatel-denigi-popolnit
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Пополнить счёт</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li><a href="{% url 'beagent.views.common.profile_balance' %}">История операций</a></li>
+						<li class="active"><a href="% url 'beagent.views.common.profile_balance_input' %}">Пополнить счёт</a></li>
+						<li><a href="{% url 'beagent.views.common.profile_balance_output' %}">Вывести деньги</a></li>
+					</ul>
+				</nav>
+				<section class="cashform" id="nal">
+					<form method="POST" id="form_nal">
+						<fieldset>
+							<div class="cashform-i clearfix">
+								<span class="cashform-t">Способ оплаты</span>
+								<div class="cashform-c">
+									<div class="cashform-radio-i clearfix">
+										<input type="radio" name="system" id="co5" class="cashform-radio"  onclick="shov_beznal('#bez_nal','#nal','#co18','#co5');select_purses('yandex','#purses')" value="yandex" checked="checked"/>
+										<label for="co5" class="cashform-t"><span class="ym">Я</span>ндекс.Деньги</label>
+									</div>
+									<div class="cashform-radio-i clearfix">
+										<input type="radio" name="system" id="co6" class="cashform-radio"  onclick="shov_beznal('#bez_nal','#nal','#co19','#co6');select_purses('webmoney','#purses')" value="webmoney"/>
+										<label for="co6" class="cashform-t"><a href="#">WebMoney</a></label>
+									</div>
+									<div class="cashform-radio-i clearfix">
+										<input type="radio" name="system" id="co7" class="cashform-radio" onclick="shov_beznal('#nal','#bez_nal','#co20','#co7')" value="noncash"/>
+										<label for="co7" class="cashform-t">Безналичный платеж</label>
+									</div>
+									<div class="cashform-radio-i clearfix">
+										<input type="radio" name="system" id="co71" class="cashform-radio" onclick="shov_beznal('#bez_nal','#nal','#co21','#co71');select_purses('robocassa','#purses')" value="robocassa"/>
+										<label for="co71" class="cashform-t"><span class="robocassa"><span>Робо</span>касса</span></label>
+									</div>
+								</div>
+							</div>
+                            <div class="cashform-i clearfix">
+                                <label for="co1" class="cashform-t">Номер кошелька</label>
+                                <div class="cashform-c" id="purses">
+                                    <input type="text" value="" id="co1" class="custom-input" onclick="clear_radio('#purses')" name="new_purse"/>
+                                    {% if purses %}
+                                        {% for item in purses %}
+                                            <div class="cashform-radio-i clearfix">
+                                                <input type="radio" name="name" id="co3" class="cashform-radio" value="{{ item.pk }}"/>
+                                                <label for="co3" class="cashform-t">{{ item.name }}</label>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+							<div class="cashform-i clearfix">
+								<label for="co2" class="cashform-t">Сумма платежа</label>
+								<div class="cashform-c">
+									<div class="cashform-i2 clearfix">
+										<input type="text" value="" id="co2" class="custom-input" name="sum" onchange="calculate_commission('#co2','#comission_block')"/>
+										<span class="cashform-t">руб.</span>
+									</div>
+									<span class="cashform-note" id="comission_block">Коммисия системы 5%</span>
+								</div>
+							</div>
+							<div class="cashform-button">
+                                {% csrf_token %}
+                                <input type="hidden" name="form" value="nal">
+                                <input type="hidden" name="percent" value="5">
+                                <input type="hidden" name="meta" value="ajax">
+								<input type="submit" value="Пополнить счет" class="orange-button" onclick="form_send('#form_nal', '{% url 'beagent.views.common.profile_balance_input' %}', undefined, this)"/>
+							</div>
+						</fieldset>
+					</form>
+				</section>
+                <section class="cashform non_display" id="bez_nal">
+                    <form method="POST" id="form_beznal">
+                        <fieldset>
+                            <div class="cashform-i clearfix">
+                                <span class="cashform-t">Способ оплаты</span>
+                                <div class="cashform-c">
+                                    <div class="cashform-radio-i clearfix">
+                                        <input type="radio" name="system" id="co18" class="cashform-radio"  onclick="shov_beznal('#bez_nal','#nal','#co5','#co18');select_purses('yandex','#purses')" value="yandex"/>
+                                        <label for="co5" class="cashform-t"><span class="ym">Я</span>ндекс.Деньги</label>
+                                    </div>
+                                    <div class="cashform-radio-i clearfix">
+                                        <input type="radio" name="system" id="co19" class="cashform-radio" onclick="shov_beznal('#bez_nal','#nal','#co6','#co19');select_purses('webmoney','#purses')" value="webmoney"/>
+                                        <label for="co6" class="cashform-t"><a href="#">WebMoney</a></label>
+                                    </div>
+                                    <div class="cashform-radio-i clearfix">
+                                        <input type="radio" name="system" id="co20" class="cashform-radio" onclick="shov_beznal('#nal','#bez_nal','#co20','#co7')" value="noncash"/>
+                                        <label for="co7" class="cashform-t">Безналичный платеж</label>
+                                    </div>
+                                    <div class="cashform-radio-i clearfix">
+                                        <input type="radio" name="system" id="co21" class="cashform-radio" onclick="shov_beznal('#bez_nal','#nal','#co71','#co21');select_purses('robocassa','#purses')"  value="robocassa"/>
+                                        <label for="co71" class="cashform-t"><span class="robocassa"><span>Робо</span>касса</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <span class="cashform-t">Система налогов</span>
+                                <div class="cashform-c">
+                                    <div class="cashform-radio-i cashform-radio-stroke clearfix">
+                                        <input type="radio" name="taxation" id="co8" class="cashform-radio" value='osn'/>
+                                        <label for="co8" class="cashform-t">ОСН</label>
+                                    </div>
+                                    <div class="cashform-radio-i cashform-radio-stroke clearfix">
+                                        <input type="radio" name="taxation" id="co9" class="cashform-radio" value="ysn"/>
+                                        <label for="co9" class="cashform-t">УСН</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co10" class="cashform-t">Название организации</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co10" class="custom-input" name="agency"/>
+                                    <span class="cashform-note">Название организации и ее форма, пример: ООО "Биагент"</span>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co11" class="cashform-t">Ф.И.О.</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co11" class="custom-input" name="fio"/>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co12" class="cashform-t">Должность</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co12" class="custom-input" name="position"/>
+                                    <span class="cashform-note">Пример: Генеральный директор</span>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co13" class="cashform-t">На основании</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co13" class="custom-input" name="basis"/>
+                                    <span class="cashform-note">Пример: Довереность от 17 июня 2009 г.</span>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co14" class="cashform-t">Полный почтовый адрес</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co14" class="custom-input" name="post_address"/>
+                                    <span class="cashform-note">Адрес, на который отправляются оригинальные документы</span>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co15" class="cashform-t">Реквизиты</label>
+                                <div class="cashform-c">
+                                    <textarea cols="1" rows="1" id="co15" class="custom-textarea" name="requisites"></textarea>
+                                    <span class="cashform-note">Полные реквизиты компании</span>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co16" class="cashform-t">Контактный телефон</label>
+                                <div class="cashform-c">
+                                    <input type="text" value="" id="co16" class="custom-input" name="phone"/>
+                                </div>
+                            </div>
+                            <div class="cashform-i clearfix">
+                                <label for="co17" class="cashform-t">Сумма платежа</label>
+                                <div class="cashform-c">
+                                    <div class="cashform-i2 clearfix">
+                                        <input type="text" value="" id="co17" class="custom-input" name="sum" onchange="calculate_commission('#co17','#comission_block2')"/>
+                                        <span class="cashform-t">руб.</span>
+                                    </div>
+                                    <span class="cashform-note" id="comission_block2">Коммисия системы 5%</span>
+                                </div>
+                            </div>
+                            <div class="cashform-button">
+                                {% csrf_token %}
+                                <input type="hidden" name="form" value="beznal">
+                                <input type="hidden" name="percent" value="5">
+                                <input type="hidden" name="meta" value="ajax">
+                                <input type="submit" value="Запросить деньги" class="orange-button" onclick="form_send('#form_beznal', '{% url 'beagent.views.common.profile_balance_input' %}', undefined, this)"/>
+                            </div>
+                        </fieldset>
+                    </form>
+                </section>
+			</div>
+{% endblock %}

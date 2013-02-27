@@ -1,0 +1,136 @@
+{% extends 'beagent/base.html' %}
+{% load query_string %}
+{% block title %}
+    ba-agent-moi_ploshadki
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Мои площадки</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+                        {% if not request.GET.status %}
+                            <li class="active"><a href="{% url 'beagent.views.agent.view_agent_platforms' %}">Все</a></li>
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=active">Активные</a></li>
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=nonactive">Не активные</a></li>
+                        {% elif request.GET.status == 'active' %}
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}">Все</a></li>
+                            <li class="active"><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=active">Активные</a></li>
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=nonactive">Не активные</a></li>
+                        {% elif request.GET.status == 'nonactive' %}
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}">Все</a></li>
+                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=active">Активные</a></li>
+                            <li class="active"><a href="{% url 'beagent.views.agent.view_agent_platforms' %}?status=nonactive">Не активные</a></li>
+                        {% endif %}
+					</ul>
+				</nav>
+				<section class="table-box">
+					<table class="table-mysites">
+						<thead>
+							<tr>
+								<th>Площадка</th>
+								<th>Статус</th>
+								<th>В работе</th>
+								<th>На оплате</th>
+								<th>Поиск</th>
+								<th colspan="2">Заработано всего, руб</th>
+							</tr>
+						</thead>
+						<tbody>
+                        {% for item in result %}
+                            <tr>
+                                <td>
+                                    <span class="title toverflow"><a href="{% url 'beagent.views.agent.show_agent_platform' %}?id={{ item.id }}">{{ item.address }}</a></span>
+                                    {% if item.inventation != 0%}<span class="messages">{{ item.inventation }}</span>{% else %}{% endif %}
+                                    <span class="desc">{% for i in item.type.all %}{{ i.name }} {% endfor %}</span>
+                                </td>
+                                <td>
+                                    {% if item.status == 'active' %}
+                                        <span class="status-olive">активная</span>
+                                    {% elif item.status == 'nonactive' %}
+                                        <span class="status-gray">не активная</span>
+                                    {% elif item.status == 'activation' %}
+                                        <span class="status-yellow"><a href="{% url 'beagent.views.agent.agent_activate_platform' %}?platform={{ item.id }}">активация</a></span>
+                                    {% elif item.status == 'reject' %}
+                                        <span class="status-red">отклонена</span>
+                                    {% endif %}
+                                    {% if item.status == 'activation' or item.status == 'reject' %}{% endif %}
+                                    {% if item.status == 'active' %}
+                                        <span class="desc"><a href="{% url 'beagent.views.agent.agent_platform_change_status' %}?status=nonactive&platform={{ item.id }}">Выкл.</a></span>
+                                    {% elif item.status != 'activation' or item.status == 'reject' %}
+                                        <span class="desc"><a href="{% url 'beagent.views.agent.agent_platform_change_status' %}?status=active&platform={{ item.id }}">Вкл.</a></span>
+                                    {% endif %}
+                                </td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td><a href="{% url 'beagent.views.agent.redaction_agent_platform' %}?id={{ item.id }}" class="ico-edit"></a></td>
+                            </tr>
+                        {% endfor %}
+						</tbody>
+					</table>
+				</section>
+                <section class="paginator-box">
+                    {% for pagination_list_item in pagination_list %}
+                        {% if not pagination_list_item %}
+                            <li class="dots"><a href="#">...</a></li>
+                        {% else %}
+                            <li {% if pagination_page == pagination_list_item %}class="active"{% endif %}>
+                                <a href="{% url pages %}?page={{ pagination_list_item }}{% if request.GET.search %}&search={{ request.GET.search }}{% endif %}">{{ pagination_list_item }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    <a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.back per_page=request.GET.per_page status=request.GET.status %}" class="paginator-navi back"><span>Предыдущая</span></a>
+                    <a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=a&per_page=10' page=pag.pageBackForward.forward per_page=request.GET.per_page status=request.GET.status %}" class="paginator-navi next"><span>Следующая</span></a>
+
+                    <ul class="paginator">
+                        <li>Страница:</li>
+                        {% for item in pag.pagging_pages %}
+                            {% if item == pag.page%}
+                                <li class='active'><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=a&per_page=10' page=item per_page=request.GET.per_page status=request.GET.status %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% else %}
+                                <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=m&per_page=10' page=item per_page=request.GET.per_page status=request.GET.status %}">
+                                    {% if not item %}
+                                        ..
+                                    {% else %}
+                                        {{ item }}
+                                    {% endif %}
+                                </a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <span class="paginator-options">
+                        <div class="on-page">На странице: </div>
+                        <div class="paginated-pages">
+                            <a class="paginator-view">
+                                <span>
+                                    <div class="dropdown">
+                                        <a id="drop4" class="dropdown-toggle" data-toggle="dropdown" role="button">{{ pag.per_page }} элементов<b class="caret"></b></a>
+                                        <ul id="menu1" class="dropdown-menu" aria-labelledby="drop4" role="menu">
+                                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=1&per_page=5' status=request.GET.status %}" tabindex="-1">5 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=1&per_page=10' status=request.GET.status %}" tabindex="-1">10 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=1&per_page=15' status=request.GET.status %}" tabindex="-1">15 элементов</a></li>
+                                            <li><a href="{% url 'beagent.views.agent.view_agent_platforms' %}{% query_string '?page=1&per_page=20' status=request.GET.status %}" tabindex="-1">20 элементов</a></li>
+                                        </ul>
+                                    </div>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="count_elements">/ <strong>{{ count_list }}</strong></div>
+                    </span>
+                </section>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+{% endblock %}
+{% block content %}
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Редактирование профиля</h1>
+                {% block change_password %}
+                {% endblock %}
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li id="pass_block"><a class='pointer' onclick="cclick('#pass-change-popup','#pass_block');">Сменить пароль</a></li>
+						<li><a href="{% url 'beagent.views.common.edit_profile_blackLists' %}">Чёрный список</a></li>
+                        {% if user.type == 'advertiser' %}
+                            <li><a href="{% url 'beagent.views.common.edit_profile_whiteLists' %}">Белый список</a></li>
+                        {% endif %}
+					</ul>
+                    <div class="popup pass-change-popup" id="pass-change-popup">
+                        <form id="changePassword">
+                            <fieldset>
+                                <div class="pass-change-i">
+                                    <label>Старый пароль</label>
+                                    <div class="pass-change-c">
+                                        <input type="text" value="" class="custom-input custom-input-small" name="old_password"/>
+                                    </div>
+                                </div>
+                                <div class="pass-change-i">
+                                    <label>Новый пароль</label>
+                                    <div class="pass-change-c">
+                                        <input type="text" value="" class="custom-input custom-input-small" name="new_password"/>
+                                    </div>
+                                </div>
+                                <div class="pass-change-i">
+                                    <label>Повторите новый пароль</label>
+                                    <div class="pass-change-c">
+                                        <input type="text" value="" class="custom-input custom-input-small" name="confirm_password"/>
+                                    </div>
+                                </div>
+                                <div class="popup-buttons clearfix">
+                                    {% csrf_token %}
+                                    <li><input class="orange-button" type="button" onclick="form_send('#changePassword', '{% url 'beagent.views.common.change_password' %}', undefined, this)" value="Сохранить"></li>
+                                    <li><a onclick="reset_form('#changePassword')" class="popup-link-btn pointer" >Отмена</a></li>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+				</nav>
+				<section class="form-box">
+					<form id="form" enctype="multipart/form-data" >
+						<fieldset>
+							<div class="form-box-i clearfix">
+								<label for="as1">Имя, фамилия</label>
+								<div class="form-box-c">
+									<input type="text" name="userName" value="{{ user.name }} {{ user.surname }}" id="as1" class="custom-input" />
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label>Дата рождения</label>
+								<div class="form-box-c clearfix"><input class="custom-input" type="text" id="datepicker" name="birthday" />
+									<!--<div class="form-box-db1">
+										<select class="custom-select" name="day">
+											<option disabled="disabled">День</option>
+                                            {% for day in days %}
+                                                {% if user.birthday|date:"d"  ==  day %}
+                                                    <option selected value="day" >{{ day }}</option>
+                                                {% else %}
+                                                    <option value="{{ day }}">{{ day }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+										</select>
+									</div>
+									<div class="form-box-db2">
+										<select class="custom-select" name="month">
+											<option>Месяц</option>
+                                            {% for month in months %}
+                                                {% if user.birthday|date:"m"  ==  month %}
+                                                    <option selected value="{{ month }}" >{{ month }}</option>
+                                                {% else %}
+                                                    <option value="{{ month }}">{{ month }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+										</select>
+									</div>
+									<div class="form-box-db3">
+										<select class="custom-select" name="year">
+											<option>Год</option>
+                                            {% for year in years %}
+                                                {% if user.birthday|date:"y"  ==  year %}
+                                                    <option selected value="{{ year }}" >{{ year }}</option>
+                                                {% else %}
+                                                    <option value="{{ year }}">{{ year }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+										</select>
+									</div>-->
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as2">О себе</label>
+								<div class="form-box-c">
+									<textarea cols="1" rows="1" id="as2" class="custom-textarea" name="about">{{ user.about }}</textarea>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label>Фотография</label>
+								<div class="form-box-c">
+									<div class="photo-box">
+										<div class="photo-box-i">
+                                            {% load thumbnail %}
+											<img src="{% thumbnail user.photo 180x190 crop %}" alt="" />
+										</div>
+										<ul class="photo-box-change clearfix">
+                                            <input type="file" name="photo" id="id_logo" style='display: none;'>
+											<li><a onclick="select_file('#id_logo','#file_path')" class="black-button pointer">Выбрать файл</a></li>
+											<li class="txt" id="file_path">Файл не выбран</li>
+											<li class="txt"><a onclick="clear_file('#id_logo','#file_path')" class="delete pointer"><span>Удалить</span></a></li>
+										</ul>
+										<div class="help">Вы можете загрузить только собственную фотографию расширения <strong>JPG</strong>, <strong>PNG</strong> или <strong>GIF</strong> и размером не более 3 МБ. В случае возникновения проблем попробуйте загрузить фотографию меньшего размера. Присоединение к фотографии любых посторонних изображений, рекламных объявлений или ссылок категорически запрещено.</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as3">Страна проживания</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.country.name %}{{ user.country.name }}{% endif %}" id="as3" class="custom-input" name="country"/>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as4">Город</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.town.name %}{{ user.town.name }}{% endif %}" id="as4" class="custom-input" name="town"/>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as5">Эл. почта</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.email %}{{ user.email }}{% endif %}" id="as5" class="custom-input" name="email"/>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as6">Телефон</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.phone %}{{ user.phone }}{% endif %}" id="as6" class="custom-input" name="phone"/>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as7">Skype</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.skype %}{{ user.skype }}{% endif %}" id="as7" class="custom-input" name="skype"/>
+								</div>
+							</div>
+							<div class="form-box-i clearfix">
+								<label for="as8">ICQ</label>
+								<div class="form-box-c">
+									<input type="text" value="{% if user.icq %}{{ user.icq }}{% endif %}" id="as8" class="custom-input" name="icq"/>
+								</div>
+							</div>
+							<div class="form-box-b">
+                                {% csrf_token %}
+                                <input type="hidden" value="ajax" name="meta">
+								<a class="orange-button pointer" onclick="form_send('#form', '{% url 'beagent.views.common.edit_profile' %}', undefined, this)">Сохранить</a>
+							</div>
+						</fieldset>
+					</form>
+				</section>
+			</div>
+{% endblock %}

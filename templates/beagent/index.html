@@ -1,0 +1,5 @@
+{% extends 'beagent/base.html' %}
+{% block content %}
+    <a href="{% url 'beagent.views.common.signin' %}">Авторизация</a>
+    <a href="{% url 'beagent.views.common.signup' %}">Регистрация</a>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    ba-agent-soobshenia-sendform
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Сообщения</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+                        <li><a href="{% url 'beagent.views.common.profile_messages' %}">События</a></li>
+                        <li class="active"><a href="{% url 'beagent.views.common.profile_ask_question' %}">Задать вопрос</a></li>
+					</ul>
+				</nav>
+				<section class="send-message-form">
+                    <form id="send_msg">
+                        {% csrf_token %}
+						<fieldset>
+							<div class="send-message-form-i clearfix">
+								<label>Раздел</label>
+								<div class="send-message-form-c">
+									<select class="custom-select" name="section">
+										<option>Выбрать раздел</option>
+										<option>Выбрать раздел 2</option>
+										<option>Выбрать раздел раздел 34</option>
+										<option>Раздел 751</option>
+									</select>
+								</div>
+							</div>
+							<div class="send-message-form-i clearfix">
+								<label>Сообщение</label>
+								<div class="send-message-form-c">
+									<textarea cols="1" rows="1" class="custom-textarea" name="msg"></textarea>
+								</div>
+							</div>
+							<div class="send-message-form-b">
+								<input value="Отправить" class="orange-button small" onclick="form_send('#send_msg', '{% url 'beagent.views.common.profile_ask_question' %}', undefined, this)"/>
+							</div>
+						</fieldset>
+					</form>
+				</section>
+			</div>
+		</div>
+{% endblock %}

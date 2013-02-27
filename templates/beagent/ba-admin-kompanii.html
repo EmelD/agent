@@ -1,0 +1,162 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+        <title>ba-admin-kompanii</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Администратор</a></li>
+					</ul>
+				</nav>
+				<h1>Компании</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li class="active"><a href="#">Все</a></li>
+						<li><a href="#">Активные</a></li>
+						<li><a href="#">Заблокированные</a></li>
+					</ul>
+				</nav>
+				<section class="find-site find-site-big">
+					<form action="#">
+						<fieldset class="clearfix">
+							<label for="fs1">Найти кампанию</label>
+							<div class="find-site-input">
+								<input type="text" value="Владелец, эл. почта, ID, компания, тег" id="fs1" onfocus="javascript:if(this.value=='Владелец, эл. почта, ID, компания, тег')this.value=''" onblur="javascript:if(this.value=='')this.value='Владелец, эл. почта, ID, компания, тег'" class="custom-input custom-input-small" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="table-box">
+					<table class="table-company table-company-admin">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Дата добавления</th>
+								<th>Компания</th>
+								<th>Цена, руб.</th>
+								<th colspan="2">Владалец</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>11</td>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В кампании 2 задания, <a href="#" class="open"><span>показать</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">Бюджет — 4000 руб.; потрачено — 1000 руб.; зарезервировано — 1000 руб.</span>
+										</div>
+										<div class="info-cost">400—18 000</div>
+									</div>
+									<div class="info-dop">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter <span class="green">— выполненеа</span></span>
+											<span>400</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook <span class="olive">— активная</span></span>
+											<span>50</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге <span class="gray">— на паузе</span></span>
+											<span>400</span>
+										</div>
+									</div>
+								</td>
+								<td><a href="#" class="toverflow">Толик oop op23</a></td>
+								<td><a href="#" class="ico-cancel"></a></td>
+							</tr>
+							<tr class="active">
+								<td>44</td>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В кампании 2 задания, <a href="#" class="close"><span>скрыть</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">Бюджет — 4000 руб.; потрачено — 1000 руб.; зарезервировано — 1000 руб.</span>
+										</div>
+										<div class="info-cost">400—530</div>
+									</div>
+									<div class="info-dop" style="display:block;">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter <span class="green">— выполненеа</span></span>
+											<span>400</span>
+											<a href="#" class="cancel"></a>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook <span class="olive">— активная</span></span>
+											<span>50</span>
+											<a href="#" class="cancel"></a>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге <span class="gray">— на паузе</span></span>
+											<span>400</span>
+											<a href="#" class="cancel"></a>
+										</div>
+									</div>
+								</td>
+								<td><a href="#" class="toverflow">Толик oop op23</a></td>
+								<td><a href="#" class="ico-cancel"></a></td>
+							</tr>
+							<tr>
+								<td>11</td>
+								<td>14 сен. 2012, 18:00</td>
+								<td colspan="2">
+									<div class="info clearfix">
+										<div class="info-title">
+											<a href="#" class="title toverflow">Валенки со звездами</a>
+											<span class="desc">В кампании 2 задания, <a href="#" class="open"><span>показать</span></a></span>
+										</div>
+										<div class="info-i">
+											<span class="desc">Бюджет — 4000 руб.; потрачено — 1000 руб.; зарезервировано — 1000 руб.</span>
+										</div>
+										<div class="info-cost">400—18 000</div>
+									</div>
+									<div class="info-dop">
+										<div class="info-dop-i clearfix">
+											<span>Публикая в Twitter <span class="green">— выполненеа</span></span>
+											<span>400</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Like в Facebook <span class="olive">— активная</span></span>
+											<span>50</span>
+										</div>
+										<div class="info-dop-i clearfix">
+											<span>Комментарий в Блоге <span class="gray">— на паузе</span></span>
+											<span>400</span>
+										</div>
+									</div>
+								</td>
+								<td><a href="#" class="toverflow">Толик oop op23</a></td>
+								<td><a href="#" class="ico-cancel"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section class="paginator-box">
+					<a href="#" class="paginator-navi back"><span>Предыдущая</span></a>
+					<a href="#" class="paginator-navi next"><span>Следующая</span></a>
+					<ul class="paginator">
+						<li>Страница:</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="active"><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">...</a></li>
+						<li><a href="#">7</a></li>
+					</ul>
+					<span class="paginator-options">На странице: <a href="#" class="paginator-view"><span>10 элементов</span></a> / <strong>152</strong></span>
+				</section>
+			</div>
+		</div>
+{% endblock %}

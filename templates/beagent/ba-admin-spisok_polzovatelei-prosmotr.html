@@ -1,0 +1,149 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+        <title>ba-admin-spisok_polzovatelei-prosmotr</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<div class="left-col">
+					<nav class="breadcrumbs">
+						<ul>
+							<li><a href="#">Кабинет</a></li>
+						</ul>
+					</nav>
+					<h1>Илья Гордеев <span class="userid">ID #12</span><a href="#" class="header-edit"></a></h1>
+					<nav class="menu-l3">
+						<ul class="clearfix">
+							<li><a href="#">Сменить пароль</a></li>
+							<li><a href="#">Заблокировать</a></li>
+							<li><a href="#">Войти</a></li>
+						</ul>
+					</nav>
+					<section class="user-about">
+						<p class="db">Дата рождения — 29 сентября 1979 <a href="#" class="ico-edit"></a></p>
+						<p>Интерактивный рассказ — это возможность прочитать произведение так, как вы этого хотите. Рассказ имеет большую вариативность действий в той или иной ситуации и вы сами решаете как будут разворачиваться события в сюжете. В зависимости от вашего выбора и будет зависеть как далеко вы сможете “пройти” книгу. <a href="#" class="ico-edit"></a></p>
+					</section>
+					<section class="statistics">
+						<ul>
+							<li>Количество приглашений — <span class="font-big"><a href="#">10</a></span></li>
+							<li>Количество невыполненных задач — <span class="font-big"><a href="#">23</a></span></li>
+							<li>Количество площадок — <span class="font-big"><a href="#">5</a></span></li>
+							<li class="budget">Бюджет — <span class="font-big">10 000</span> руб. <a href="#" class="ico-edit"></a></li>
+						</ul>
+					</section>
+					<section class="messages">
+						<h2>Общение с администратором системы</h2>
+						<div class="messages-cols">
+							<div class="text">
+								<p>Уважаемые пользователи, при общении в администрацию старайтесь сообщать как можно больше информации. Это сократить время на разбор вашего вопроса.</p>
+							</div>
+							<div class="comments">
+								<div class="comments-i clearfix">
+									<div class="comments-avatar">
+										<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+									</div>
+									<div class="comments-content">
+										<span class="comments-title">Я, <time>7 декабря 2010, 16:50</time></span>
+										<span class="comments-text">Могу взяться за работу</span>
+									</div>
+								</div>
+								<div class="comments-i clearfix">
+									<div class="comments-avatar">
+										<a href="#"><img src="content/avatar2.jpg" alt="" /></a>
+									</div>
+									<div class="comments-content">
+										<span class="comments-title"><a href="#">Илья Гордеев</a>, <time>7 декабря 2010, 16:50</time></span>
+										<span class="comments-text">В реальной жизни PostgreSQL используют чаще для технологически-сложных проектов, просто у его пользователей не возникает такого количества проблем, о которых можно писать статьи</span>
+									</div>
+								</div>
+								<div class="comments-i clearfix">
+									<div class="comments-avatar">
+										<a href="#"><img src="content/avatar2.jpg" alt="" /></a>
+									</div>
+									<div class="comments-content">
+										<span class="comments-title"><a href="#">Илья Гордеев</a>, <time>7 декабря 2010, 16:50</time></span>
+										<span class="comments-text">Не возникает такого количества проблем, о которых можно писать статьи</span>
+									</div>
+								</div>
+								<div class="comments-i clearfix">
+									<div class="comments-avatar">
+										<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+									</div>
+									<div class="comments-content">
+										<span class="comments-title">Я, <time>7 декабря 2010, 16:50</time></span>
+										<span class="comments-text">Замечательно, приступайте!</span>
+									</div>
+								</div>
+							</div>
+							<div class="message-post">
+								<form action="#">
+									<fieldset>
+										<textarea cols="1" rows="1" class="custom-textarea"></textarea>
+										<input type="submit" value="Отправить" class="orange-button" />
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</section>
+					<section class="opinions">
+						<h2>Отзывы <span class="sup"><span class="green">+128</span> / <span class="red">−8</span></span></h2>
+						<div class="opinions-i opinion-open">
+							<div class="opinion-t">
+								<p>Как поправишь, скажи мне пожалуйста ) Пытаюсь поймать эту ошибку. не получается. У меня пишет "Компания обязательно должна иметь название". Видимо проблема не в форме, а в языке. в смысле неправильно определился язык пользователя и поэтому не подгрузились нужные файлы перевода. прблема имеет системный характер. будем решать</p>
+								<a href="#" class="opinion-toggle"></a>
+							</div>
+							<div class="opinion-user clearfix">
+								<div class="opinion-avatar">
+									<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+								</div>
+								<div class="opinion-info">
+									<span class="opinion-name"><a href="#">Иван Приходько</a> <span class="rating">5</span></span>
+									<time class="opinion-date">7 декабря 2010, 16:50</time>
+								</div>
+							</div>
+						</div>
+						<div class="opinions-i opinion-hide">
+							<div class="opinion-t">
+								<p>Как поправишь, скажи мне пожалуйста ) Пытаюсь поймать эту ошибку не получаетсяяяяяяяяя. У меня пишет "Компания обязательно должна иметь название". Видимо проблема не в форме, а в языке. в смысле неправильно определился язык пользователя и поэтому не подгрузились нужные файлы перевода. прблема имеет системный характер. будем решать</p>
+								<a href="#" class="opinion-toggle"></a>
+							</div>
+							<div class="opinion-user clearfix">
+								<div class="opinion-avatar">
+									<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+								</div>
+								<div class="opinion-info">
+									<span class="opinion-name"><a href="#">Иван Приходько Длинная фамилия</a> <span class="rating">5</span></span>
+									<time class="opinion-date">7 декабря 2010, 16:50</time>
+								</div>
+							</div>
+						</div>
+						<div class="opinions-i opinion-notoggle">
+							<div class="opinion-t">
+								<p>Всё супер (раскрывать нечего)</p>
+								<a href="#" class="opinion-toggle"></a>
+							</div>
+							<div class="opinion-user clearfix">
+								<div class="opinion-avatar">
+									<a href="#"><img src="content/avatar.jpg" alt="" /></a>
+								</div>
+								<div class="opinion-info">
+									<span class="opinion-name"><a href="#">Иван Приходько</a> <span class="rating">5</span></span>
+									<time class="opinion-date">7 декабря 2010, 16:50</time>
+								</div>
+							</div>
+						</div>
+					</section>
+				</div>
+				<aside class="right-col">
+					<div class="userinfo">
+						<div class="userinfo-avatar">
+							<img src="content/photo.jpg" alt="" />
+						</div>
+						<p>На проекте: 3 месяца 12 дней</p>
+						<p>Последнее посещение: 21 июня 19:59</p>
+						<p class="rating">Рейтинг <span class="ico-rate">5</span></p>
+						<p>Выполнил задач — 10</p>
+					</div>
+				</aside>
+			</div>
+		</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+        <title>ba-admin-spisok_polzovatelei</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Администратор</a></li>
+					</ul>
+				</nav>
+				<h1>Список пользователей</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li class="active"><a href="#">Все</a></li>
+						<li><a href="#">Активные</a></li>
+						<li><a href="#">Заблокированные</a></li>
+					</ul>
+				</nav>
+				<section class="find-site">
+					<form action="#">
+						<fieldset class="clearfix">
+							<label for="fs1">Найти пользователя</label>
+							<div class="find-site-input">
+								<input type="text" value="Имя, эл. почта, ID" id="fs1" onfocus="javascript:if(this.value=='Имя, эл. почта, ID')this.value=''" onblur="javascript:if(this.value=='')this.value='Имя, эл. почта, ID'" class="custom-input custom-input-small" />
+							</div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="table-box">
+					<table class="table-users">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Пользователь</th>
+								<th>Статус</th>
+								<th>Был тут</th>
+								<th>Рейтинг</th>
+								<th>Площад./Камп.</th>
+								<th>Вып./Опл.</th>
+								<th>Баланс, руб.</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>12</td>
+								<td>
+									<a href="#" class="title toverflow">Константин Контсатнинов</a>
+									<span class="desc"><a href="#">mailopop@ilya.ru</a></span>
+								</td>
+								<td><span class="status-olive">активен</span></td>
+								<td>12 сентября 2012</td>
+								<td><span class="status-green">150</span></td>
+								<td>457<span class="gray">/</span>120</td>
+								<td>215<span class="gray">/</span>120</td>
+								<td>150 000</td>
+								<td>
+									<a href="#" class="ico-delete"></a>
+									<a href="#" class="ico-cancel active"></a>
+									<a href="#" class="ico-catch active"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>12</td>
+								<td>
+									<a href="#" class="title toverflow">Константин Контсатнинов</a>
+									<span class="desc"><a href="#">mailopop@ilya.ru</a></span>
+								</td>
+								<td><span class="status-olive">активен</span></td>
+								<td>12 сентября 2012</td>
+								<td><span class="status-green">150</span></td>
+								<td>457<span class="gray">/</span>120</td>
+								<td>215<span class="gray">/</span>120</td>
+								<td>150 000</td>
+								<td>
+									<a href="#" class="ico-delete"></a>
+									<a href="#" class="ico-cancel"></a>
+									<a href="#" class="ico-catch"></a>
+								</td>
+							</tr>
+							<tr>
+								<td>12</td>
+								<td>
+									<a href="#" class="title toverflow">Константин Контсатнинов</a>
+									<span class="desc"><a href="#">mailopop@ilya.ru</a></span>
+								</td>
+								<td><span class="status-red">заблокирован</span></td>
+								<td>12 сентября 2012</td>
+								<td><span class="status-green">150</span></td>
+								<td>457<span class="gray">/</span>120</td>
+								<td>215<span class="gray">/</span>120</td>
+								<td>150 000</td>
+								<td>
+									<a href="#" class="ico-delete"></a>
+									<a href="#" class="ico-cancel"></a>
+									<a href="#" class="ico-catch"></a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section class="paginator-box">
+					<a href="#" class="paginator-navi back"><span>Предыдущая</span></a>
+					<a href="#" class="paginator-navi next"><span>Следующая</span></a>
+					<ul class="paginator">
+						<li>Страница:</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="active"><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">...</a></li>
+						<li><a href="#">7</a></li>
+					</ul>
+					<span class="paginator-options">На странице: <a href="#" class="paginator-view"><span>10 элементов</span></a> / <strong>152</strong></span>
+				</section>
+			</div>
+		</div>
+{% endblock %}

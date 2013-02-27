@@ -1,0 +1,84 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+    ba-agent-denigi
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="{% url 'beagent.views.common.profile' %}">Кабинет</a></li>
+					</ul>
+				</nav>
+				<h1>Баланс</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li class="active"><a href="{% url 'beagent.views.common.profile_balance' %}">История операций</a></li>
+                        {% if user.type == 'advertiser' %}<li><a href="{% url 'beagent.views.common.profile_balance_input' %}">Пополнить счёт</a></li>{% endif %}
+						<li><a href="{% url 'beagent.views.common.profile_balance_output' %}">Вывести деньги</a></li>
+					</ul>
+				</nav>
+				<section class="filter-table">
+					<form action="{% url 'beagent.views.common.profile_balance' %}" name='formfilter' id="formfilter" method="POST" >
+                        {% csrf_token %}
+						<fieldset class="clearfix">
+							<label>Отфильтровать по дате</label>
+							<div class="filter-table-date">
+								<input type="text" value="" class="inp-cal" id="datepicker" name="date_from"/>
+								<a class="ico-cal"></a>
+							</div>
+							<div class="filter-table-date">
+								<input type="text" value="" class="inp-cal" id="datepicker2" onchange="document.getElementById('formfilter').submit(); return false;" name="date_to"/>
+								<a class="ico-cal"></a>
+							</div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="table-box">
+					<table class="table-balance">
+						<thead>
+							<tr>
+								<th>Дата</th>
+								<th>Тип операции</th>
+								<th>Платежный шлюз</th>
+								<th>Сумма, руб.</th>
+							</tr>
+						</thead>
+						<tbody>
+                        {% for item in balance %}
+                            <tr>
+                                <td>{{ item.date|date:"d F Y, H:i"|lower }}</td>
+                                <td>
+                                    {% if user.type == 'advertiser' %}
+                                        {% if item.type == 'in' %}
+                                            <a class="ico-link-up ico-link-up-ie7"><span>Введено денег</span></a>
+                                        {% elif item.type == 'out'%}
+                                            <a class="ico-link-down-ie7 ico-link-down"><span>Запрос на вывод</span></a>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if item.type == 'in' %}
+                                            <a class="ico-link-down-ie7 ico-link-down"><span>Введено денег</span></a>
+                                        {% elif item.type == 'out'%}
+                                            <a class="ico-link-up ico-link-up-ie7"><span>Запрос на вывод</span></a>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if item.system == 'yandex' %}
+                                        <span class="ym">Я</span>ндекс.Деньги
+                                    {% elif item.system == 'webmoney'%}
+                                        <a >WebMoney</a>
+                                    {% elif item.system == 'robocassa'%}
+                                        <a >Робокасса</a>
+                                    {% else %}
+                                        Безналичный платеж
+                                    {% endif %}
+                                </td>
+                                <td>{{ item.sum }}</td>
+                            </tr>
+                        {% endfor %}
+						</tbody>
+					</table>
+				</section>
+			</div>
+		</div>
+{% endblock %}

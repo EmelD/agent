@@ -1,0 +1,125 @@
+{% extends 'beagent/base.html' %}
+{% block title %}
+        <title>ba-admin-dengi-rashod</title>
+{% endblock %}
+{% block content %}
+			<div class="content fixsize clearfix">
+				<nav class="breadcrumbs">
+					<ul>
+						<li><a href="#">Администратор</a></li>
+					</ul>
+				</nav>
+				<h1>Деньги</h1>
+				<nav class="menu-l3">
+					<ul class="clearfix">
+						<li><a href="#">Приход</a></li>
+						<li class="active"><a href="#">Расход</a></li>
+						<li><a href="#">Запросы на вывод</a> — <span class="red">25</span></li>
+					</ul>
+				</nav>
+				<section class="filter-table">
+					<form action="#">
+						<fieldset class="clearfix">
+							<label>Отфильтровать по дате</label>
+							<div class="filter-table-date">
+								<input type="text" value="15 сентября 2012" class="inp-cal" />
+								<a href="#" class="ico-cal"></a>
+							</div>
+							<div class="filter-table-date">
+								<input type="text" value="" class="inp-cal" />
+								<a href="#" class="ico-cal"></a>
+							</div>
+							<div class="import">Сохранить в <a href="#" class="ico-xls"><span>Excel</span></a></div>
+						</fieldset>
+					</form>
+				</section>
+				<section class="table-box">
+					<table class="table-money expense">
+						<thead>
+							<tr>
+								<th>Шлюз</th>
+								<th>Сумма, руб.</th>
+								<th>Зачислено пользователю, руб.</th>
+								<th>Комиссия сервиса, руб.</th>
+								<th>Комиссия шлюза, руб.</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><span class="ym">Я</span>ндекс.Деньги</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>15 000</td>
+							</tr>
+							<tr>
+								<td><a href="#">WebMoney</a></td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>52</td>
+								<td>15 000</td>
+							</tr>
+							<tr>
+								<td>Безналичный платеж</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>15 000</td>
+							</tr>
+							<tr>
+								<td>Безналичный платеж</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>15 000</td>
+								<td>245</td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+				<section class="paginator-box">
+					<a href="#" class="paginator-navi back"><span>Предыдущая</span></a>
+					<a href="#" class="paginator-navi next"><span>Следующая</span></a>
+					<ul class="paginator">
+						<li>Страница:</li>
+						<li><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li class="active"><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">...</a></li>
+						<li><a href="#">7</a></li>
+					</ul>
+					<span class="paginator-options">На странице: <a href="#" class="paginator-view"><span>10 элементов</span></a> / <strong>152</strong></span>
+				</section>
+				<section class="graph-money">
+					<h2>График прихода/расхода</h2>
+					<div class="box">
+						&nbsp;
+					</div>
+					<div class="graph-navi clearfix">
+						<div class="graph-navi-i">
+							<input type="checkbox" id="gn1" />
+							<label for="gn1">График №1</label>
+						</div>
+						<div class="graph-navi-i">
+							<input type="checkbox" id="gn2" />
+							<label for="gn2">График №2</label>
+						</div>
+						<div class="graph-navi-i">
+							<input type="checkbox" id="gn3" />
+							<label for="gn3">График №3</label>
+						</div>
+						<div class="graph-navi-i">
+							<input type="checkbox" id="gn4" />
+							<label for="gn4">График №4</label>
+						</div>
+						<div class="graph-navi-i">
+							<input type="checkbox" id="gn5" />
+							<label for="gn5">График №5</label>
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>
+{% endblock %}
